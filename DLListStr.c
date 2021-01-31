@@ -66,17 +66,14 @@ DLListStr newDLListStr() {
 }
 
 bool checkVal(DLListStr L, char *val) {
-  bool result = true;
   DLListNode *temp = L->first;
   while (temp != NULL) {
     if (strcmp(temp->value, val) == 0) {
-      break;
-    } else {
-      result = false;
+      return true;
     }
     temp = temp->next;
   }
-  return result;
+  return false;
 }
 
 int compareToByVal(DLListNode *first, DLListNode *second) {
@@ -192,6 +189,20 @@ void insertSetOrdPageRankAndoutDegree(DLListStr L, char *val, int outdegree,
         pre = pre->next, curr = curr->next;
       }
     }
+  }
+}
+
+// find the val which can pare to the page link and insert to the sub-list
+void insertSubList(DLListStr L, char *val, char *url) {
+  DLListNode *present = L->first;
+  while (present != NULL) {
+    if (strcmp(present->value, val) == 0) {
+      if (present->sub == NULL) {
+        present->sub = newDLListStr();
+      }
+      insertSetOrd(present->sub, url);
+    }
+    present = present->next;
   }
 }
 

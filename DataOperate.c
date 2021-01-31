@@ -357,7 +357,7 @@ void outputInvertedFile(DLListStr wordList) {
           sub = sub->next;
         }
       }
-      printf("\n");
+      fprintf(fp, "\n");
       container = container->next;
     }
 
@@ -461,20 +461,6 @@ void outputWithLimit(DLListStr resultList, int limit) {
       }
       curr = curr->next;
     }
-  }
-}
-
-// find the val which can pare to the page link and insert to the sub-list
-void insertSubList(DLListStr dataUrls, char *val, char *url) {
-  DLListNode *present = dataUrls->first;
-  while (present != NULL) {
-    if (strcmp(present->value, val) == 0) {
-      if (present->sub == NULL) {
-        present->sub = newDLListStr();
-      }
-      insertSetOrd(present->sub, url);
-    }
-    present = present->next;
   }
 }
 
