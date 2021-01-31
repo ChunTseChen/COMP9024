@@ -435,10 +435,11 @@ void getResultList(DLListStr resultList, DLListStr invertedList,
   DLListNode *invNode = invertedList->first;
   DLListNode *pagNode = pagerankList->first;
   while (invNode != NULL) {
+    pagNode = pagerankList->first;
     while (pagNode != NULL) {
       if (strcmp(invNode->value, pagNode->value) == 0) {
         insertSetOrdCountAndPageRank(resultList, invNode->value, invNode->count,
-                                     pagNode->pagerank);
+                                     pagNode->pagerank, pagNode->degree);
       }
       pagNode = pagNode->next;
     }

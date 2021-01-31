@@ -59,5 +59,5 @@ bool checkVal(DLListStr L, char *val);
 void countByVal(DLListStr L, char *val, int count);
 
 void insertSetOrdCountAndPageRank(DLListStr L, char *val, int count,
-                                  double pagerank);
+                                  double pagerank, int outdegree);
 #endif

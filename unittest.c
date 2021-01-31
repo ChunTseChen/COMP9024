@@ -500,6 +500,30 @@
 //     }
 // }
 
+// void outputWithLimit(DLListStr resultList, int limit)
+// {
+//     FILE *fp;
+//     if ((fp = fopen(".txt", "w")) == NULL)
+//     {
+//         printf("Error!\n");
+//     }
+//     else
+//     {
+//         DLListNode *curr = resultList->first;
+//         int count = 0;
+//         while (curr != NULL)
+//         {
+//             fprintf(stdout, "%s\n", curr->value);
+//             count++;
+//             if (count == limit)
+//             {
+//                 break;
+//             }
+//             curr = curr->next;
+//         }
+//     }
+// }
+
 // int main(int argc, char *argv[])
 // {
 
@@ -530,6 +554,8 @@
 //     DLListStr resultList = newDLListStr();
 //     getResultList(resultList, invertedList, pagerankList);
 //     showDLListStr(resultList);
+
+//     outputWithLimit(resultList, 30);
 
 //     return 0;
 // }
