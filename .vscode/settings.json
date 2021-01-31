@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "termios.h": "c",
-        "pthread.h": "c"
+        "pthread.h": "c",
+        "dataoperate.h": "c"
     }
 }
