@@ -34,7 +34,6 @@
 //   Graph g =newGraph(dataUrls->nitems);
 //   //read the datas from section-1 and input to the graph
 //   readSection1(dataUrls, g);
-//   showGraph(g);
 
 //   //4.Calulate the pagerank
 

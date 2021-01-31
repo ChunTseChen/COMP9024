@@ -214,6 +214,7 @@ void readSection2(DLListStr dataUrls, DLListStr wordList)
     }
     else
     {
+      int state = 0;
       while (fgets(line, MAXSTRING, f) != NULL)
       {
         /* first token */
@@ -222,7 +223,6 @@ void readSection2(DLListStr dataUrls, DLListStr wordList)
         while (token != NULL)
         {
           token = trim(token);
-          int state = 0;
           if (strcmp(token, "#start") == 0)
           {
             state = 1;
@@ -361,18 +361,18 @@ void outputInvertedFile(DLListStr wordList)
 
     while (container != NULL)
     {
-      fprintf(fp, "%s", container->value);
+      fprintf(fp, "%s ", container->value);
 
       if (container->sub != NULL)
       {
         DLListNode *sub = container->sub->first;
         while (sub != NULL)
         {
-          fprintf(fp, "%s", sub->value);
+          fprintf(fp, "%s ", sub->value);
           sub = sub->next;
         }
       }
-      printf("\n");
+      fprintf(fp, "\n");
       container = container->next;
     }
 
@@ -462,6 +462,7 @@ void getResultList(DLListStr resultList, DLListStr invertedList, DLListStr pager
   DLListNode *pagNode = pagerankList->first;
   while (invNode != NULL)
   {
+    pagNode = pagerankList->first;
     while (pagNode != NULL)
     {
       if (strcmp(invNode->value, pagNode->value) == 0)
