@@ -1,0 +1,57 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "2.0.0",
+    "configurations": [
+      {
+        "name": "C Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/pagerank",
+        "preLaunchTask": "gcc",
+        "internalConsoleOptions": "openOnSessionStart",
+        "logging": {
+          "moduleLoad": false,
+          "programOutput": true,
+          "trace": false
+        },
+        "showDisplayString": false,
+        "args": [
+            "0.85",
+            "0.00001",
+            "1000"
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": false, // set true to enable keyboard input
+        "osx": {
+          "MIMode": "lldb"
+        }
+      },
+      {
+        "name": "C++ Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${fileDirname}/bin/${fileBasenameNoExtension}.o",
+        "preLaunchTask": "clang++",
+        "internalConsoleOptions": "openOnSessionStart",
+        "logging": {
+          "moduleLoad": false,
+          "programOutput": true,
+          "trace": false
+        },
+        "showDisplayString": false,
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true, // set true to enable keyboard input
+        "osx": {
+          "MIMode": "lldb"
+        }
+      }
+    ]
+  }
+  
