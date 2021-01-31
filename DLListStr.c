@@ -39,7 +39,7 @@ typedef struct DLListRep
 } DLListRep;
 
 // create a new DLListNode (private function)
-static DLListNode *newDLListNode(char *val, int outdegree, double pagerank)
+static DLListNode *newDLListNode(char *val, int outdegree, double pagerank, int count)
 {
 	DLListNode *new;
 	new = malloc(sizeof(DLListNode));
@@ -51,7 +51,7 @@ static DLListNode *newDLListNode(char *val, int outdegree, double pagerank)
 	new->degree = outdegree;
 	new->pagerank = pagerank;
 	new->sub = NULL;
-	new->count = 0;
+	new->count = count;
 	return new;
 }
 
@@ -140,7 +140,7 @@ void insertSetOrd(DLListStr L, char *val)
 	   insert val in L  (in order), no duplicates (set)
 
 	*/
-	DLListNode *newNode = newDLListNode(val, 0, 0.0);
+	DLListNode *newNode = newDLListNode(val, 0, 0.0, 0);
 	L->nitems++;
 	int c = 1;
 	newNode->index = c;
@@ -185,9 +185,9 @@ void insertSetOrd(DLListStr L, char *val)
 }
 
 //insert by order from pagerank, degree, val
-void insertSetOrdPageRankAndoutDegree(DLListStr L, char *val, int outdegree, double pagerank)
+void insertSetOrdPageRankAndoutDegree(DLListStr L, char *val, int outdegree, double pagerank, int count)
 {
-	DLListNode *newNode = newDLListNode(val, outdegree, pagerank);
+	DLListNode *newNode = newDLListNode(val, outdegree, pagerank, count);
 	L->nitems++;
 	if (L->first == NULL)
 	{
@@ -246,39 +246,39 @@ void insertSubList(DLListStr L, char *val, char *url)
 	}
 }
 
-int compareByCountAndPagerank(char *val, int count, double pagerank, DLListNode *present)
+int compareByCountAndPagerank(DLListNode *new, DLListNode *present)
 {
 	int result = 0;
-	if (count < present->count)
+	if (new->count < present->count)
 	{
 		result = -1;
 	}
-	else if (count > present->count)
+	else if (new->count > present->count)
 	{
 		result = 1;
 	}
 	else
 	{
-		if (pagerank < present->pagerank)
+		if (new->pagerank < present->pagerank)
 		{
 			result = -1;
 		}
-		else if (pagerank > present->pagerank)
+		else if (new->pagerank > present->pagerank)
 		{
 			result = 1;
 		}
 		else
 		{
-			result = strcmp(val, present->value);
+			result = strcmp(new->value, present->value);
 		}
 	}
 	return result;
 }
 
 //insert by order from count, pagerank, val
-void insertSetOrdCountAndPageRank(DLListStr L, char *val, int count, double pagerank)
+void insertSetOrdCountAndPageRank(DLListStr L, char *val, int count, double pagerank, int outdegree)
 {
-	DLListNode *newNode = newDLListNode(val, count, pagerank);
+	DLListNode *newNode = newDLListNode(val, outdegree, pagerank, count);
 	L->nitems++;
 	if (L->first == NULL)
 	{
@@ -287,13 +287,13 @@ void insertSetOrdCountAndPageRank(DLListStr L, char *val, int count, double page
 	}
 	else
 	{
-		if (compareByCountAndPagerank(val, count, pagerank, L->first) > 0)
+		if (compareByCountAndPagerank(newNode, L->first) > 0)
 		{
 			newNode->next = L->first;
 			L->first->prev = newNode;
 			L->first = newNode;
 		}
-		else if (compareByCountAndPagerank(val, count, pagerank, L->last) < 0)
+		else if (compareByCountAndPagerank(newNode, L->last) < 0)
 		{
 			L->last->next = newNode;
 			newNode->prev = L->last;
@@ -305,7 +305,7 @@ void insertSetOrdCountAndPageRank(DLListStr L, char *val, int count, double page
 			DLListNode *curr = L->first->next;
 			while (curr != NULL)
 			{
-				if (compareByCountAndPagerank(val, count, pagerank, pre) < 0 && compareByCountAndPagerank(val, count, pagerank, curr) > 0)
+				if (compareByCountAndPagerank(newNode, pre) < 0 && compareByCountAndPagerank(newNode, curr) > 0)
 				{
 					pre->next = newNode;
 					newNode->next = curr;

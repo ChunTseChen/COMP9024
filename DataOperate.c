@@ -467,7 +467,7 @@ void getResultList(DLListStr resultList, DLListStr invertedList, DLListStr pager
     {
       if (strcmp(invNode->value, pagNode->value) == 0)
       {
-        insertSetOrdCountAndPageRank(resultList, invNode->value, invNode->count, pagNode->pagerank);
+        insertSetOrdCountAndPageRank(resultList, invNode->value, invNode->count, pagNode->pagerank, pagNode->degree);
       }
       pagNode = pagNode->next;
     }
